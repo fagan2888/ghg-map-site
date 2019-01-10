@@ -2,17 +2,33 @@ import { expandableSankeyDiagram } from 'd3-expandable-sankey';
 import * as d3 from 'd3';
 import { select, json } from 'd3';
 
+import './styles.css'
+
+let log = console.log;
+
+// The logger should only be disabled if we’re not in production.
+if (ENV !== 'production') {
+  // Enable LiveReload
+  document.write(
+    '<script src="http://' + (location.host || 'localhost').split(':')[0] +
+      ':35729/livereload.js?snipver=1"></' + 'script>'
+  );
+} else {
+  // Disable debugging
+  log = function() {};
+}
+
 var SCALE = 8e-9;
 var diagram = expandableSankeyDiagram()
     .scale(SCALE)
     .on('clickNode', setDetails);
 
-console.log('loading data...');
+log('loading...');
 
 json("data/sankey_data.json")
   .then(function(data) {
-    console.log('got data!');
-    console.log(data);
+    log('got data!');
+    log(data);
     diagram(select('svg').datum(data));
   })
   .catch(function(error) {
