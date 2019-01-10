@@ -18,7 +18,8 @@
     "d3": "^5.7.0",
     "d3-array": "^2.0.2",
     "d3-expandable-sankey": "github:ricklupton/d3-expandable-sankey#b3e57aa",
-    "d3-sankey-diagram": "^0.7.2"
+    "d3-sankey-diagram": "^0.7.2",
+    "intro.js": "^2.9.3"
   },
   "scripts": {
     "build": "rollup -c",

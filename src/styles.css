@@ -137,3 +137,21 @@ td:nth-of-type(3) {
   /* the colour comes from the subdivisions here */
   display: none;
 }
+
+.group rect {
+  fill: none;
+}
+
+.group text {
+  font-size: 10pt;
+  color: #555;
+}
+
+.group:hover rect {
+  stroke: #999;
+  fill: #ccc;
+}
+
+.group:hover text {
+  color: #000;
+}
