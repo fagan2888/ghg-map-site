@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import postcss from 'rollup-plugin-postcss';
+import standard from 'rollup-plugin-standard';
 import { terser } from 'rollup-plugin-terser';
 
 // `npm run build` -> `production` is true
@@ -17,9 +18,12 @@ export default {
 		sourcemap: true
 	},
 	plugins: [
+    standard({
+      exclude: 'node_modules/**',
+    }),
     replace({
       exclude: 'node_modules/**',
-      ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      ENV: JSON.stringify(production ? 'production' : 'development'),
     }),
     postcss({
       extensions: [ '.css' ],
