@@ -155,3 +155,37 @@ td:nth-of-type(3) {
 .group:hover text {
   color: #000;
 }
+
+.shepherd-text {
+  text-align: left;
+
+}
+
+.shepherd-element .shepherd-content footer .shepherd-buttons li .shepherd-button.shepherd-button-secondary {
+  background: #e1e2e3;
+  color: rgba(0,0,0,.75);
+
+}
+
+@keyframes flickerAnimation {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes highlightStrokeAnimation {
+  0%, 100% { stroke-width: 2; }
+  50%      { stroke-width: 5; }
+}
+
+[data-shepherd-step="commuting-links"] [data-link-id="FinalService^MobilityCommutingSector^Transport"],
+[data-shepherd-step="commuting-links"] [data-link-id="FinalService^MobilityCommutingSector^Industry"],
+[data-shepherd-step="motor-finalenergy"] [data-link-id="Device^Engines & motorsPetrolEngineFinalEnergy^Oil fuels"],
+[data-shepherd-step="motor-finalenergy"] [data-link-id="Device^Engines & motorsElectricMotorFinalEnergy^Electricity"]
+{
+  /* animation: flickerAnimation 1s infinite; */
+  paint-order: stroke fill;
+  stroke: red;
+  stroke-linejoin: round;
+  animation: highlightStrokeAnimation 1s infinite;
+}
