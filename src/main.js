@@ -1,7 +1,7 @@
 /* global ENV, location */
 
 import { expandableSankeyDiagram } from 'd3-expandable-sankey'
-import { select, json, format } from 'd3'
+import { select, event, json, format } from 'd3'
 
 import { setupIntro } from './intro.js'
 
@@ -27,6 +27,10 @@ var diagram = expandableSankeyDiagram()
     .on('clickNode', setDetails)
 
 log('loading...')
+
+const svg = select('svg')
+const width = svg.attr('width')
+svg.on('click', selectNothing)
 
 json('data/sankey_data.json')
   .then(function (data) {
@@ -74,6 +78,7 @@ function numberFormat (x) {
 }
 
 function setDetails (d) {
+  event.stopPropagation()
   var details = select('#details')
   details.select('h1').text(d.title)
     .append('small').text(numberFormat(d.value))
@@ -92,4 +97,20 @@ function setDetails (d) {
   rows.append('td').text(function (d) { return d.label })
   rows.append('td').text(function (d) { return numberFormat(d.value) })
   rows.append('td').text(function (d) { return d.description })
+
+  // details.style('transform', 'translateX(-370px)')
+  if (d.x0 > width / 2) {
+    details.classed('show-left', true)
+    details.classed('show-right', false)
+  } else {
+    details.classed('show-right', true)
+    details.classed('show-left', false)
+  }
+}
+
+function selectNothing () {
+  console.log('northing')
+  select('#details').classed('show-right', false)
+  select('#details').classed('show-left', false)
+  // select('#details').style('transform', '')
 }
