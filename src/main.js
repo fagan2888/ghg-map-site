@@ -84,19 +84,21 @@ function setDetails (d) {
     .append('small').text(numberFormat(d.value))
   details.select('p').text(d.description)
 
-  details.select('tbody')
-    .selectAll('tr')
+  details.select('ul')
+    .selectAll('li')
     .remove()
 
-  var rows = details.select('tbody')
-      .selectAll('tr')
+  var rows = details.select('ul')
+      .selectAll('li')
       .data(d.subdivisions)
       .enter()
-      .append('tr')
+      .append('li')
 
-  rows.append('td').text(function (d) { return d.label })
-  rows.append('td').text(function (d) { return numberFormat(d.value) })
-  rows.append('td').text(function (d) { return d.description })
+  rows.append('h2')
+    .text(function (d) { return d.label })
+    .append('small')
+    .text(function (d) { return numberFormat(d.value) })
+  rows.append('div').text(function (d) { return d.description })
 
   // details.style('transform', 'translateX(-370px)')
   if (d.x0 > width / 2) {
@@ -110,7 +112,16 @@ function setDetails (d) {
 
 function selectNothing () {
   console.log('northing')
-  select('#details').classed('show-right', false)
-  select('#details').classed('show-left', false)
+  var details = select('#details')
+
+  details.select('h1').text('')
+  details.select('p').text('Click on the diagram labels for a more detailed view.')
+
+  details.select('ul')
+    .selectAll('li')
+    .remove()
+
+  details.classed('show-right', false)
+  details.classed('show-left', false)
   // select('#details').style('transform', '')
 }

@@ -12,7 +12,7 @@ h1 {
   font-size: 140%;
 }
 
-h1 small {
+h1 small, h2 small {
   font-weight: lighter;
   padding-left: 0.7em;
 }
@@ -21,7 +21,7 @@ h1 small {
   /* width: 1500px; */
   width: 1100px;
   margin: 0 auto;
-  background-color: #fcc;
+  /* background-color: #fcc; */
 }
 
 #sankey {
@@ -31,7 +31,7 @@ h1 small {
 }
 
 #details {
-  background-color: #ddd;
+  background-color: #fff;
   position: absolute;
   width: 370px;
   top: 0;
@@ -54,19 +54,77 @@ h1 small {
   transform: translateX(400px);
 }
 
-#details table {
-  width: 100%;
-  border-spacing: 0 1em;
+/** DETAILS **/
+/* https://two-wrongs.com/draw-a-tree-structure-with-only-css */
+
+#details ul, #details li {
+  position: relative;
 }
 
-td, th {
-  text-align: left;
-  vertical-align: top;
+#details h1 {
+  margin-bottom: 0;
 }
 
-td:nth-of-type(3) {
+#details .description {
+  margin: 0 0 0 22px;
+  padding-top: 0.67em;
+  padding-bottom: 0.67em;
+  position: relative;
+}
+
+#details ul {
+  list-style: none;
+  padding-left: 22px;
+  margin-top: 0;
+}
+
+#details li {
   padding-bottom: 10px;
 }
+
+#details li h2 {
+  font-size: 100%;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0.3em;
+}
+
+/* #details li small { */
+  
+/* } */
+
+#details li::before, #details li::after, #details .description::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+}
+
+#details li::before {
+  border-top: 1px solid #000;
+  top: 9px;
+  width: 8px;
+  height: 0;
+}
+
+#details li::after, #details .description::after {
+  border-left: 1px solid #000;
+  height: 100%;
+  width: 0px;
+  top: 2px;
+}
+
+#details ul > li:last-child::after {
+  height: 8px;
+}
+
+/* td, th { */
+/*   text-align: left; */
+/*   vertical-align: top; */
+/* } */
+
+/* td:nth-of-type(3) { */
+/*   padding-bottom: 10px; */
+/* } */
 
 /* #details  */
 
@@ -92,10 +150,16 @@ td:nth-of-type(3) {
 /*   } */
 /* } */
 
+@media (max-width: 1499px) {
+  #details {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+  }
+}
+
 @media (min-width: 1500px) {
   .container {
     width: 1500px;
-    background-color: #cfc;
+    /* background-color: #cfc; */
   }
   #details {
     /* width: 370px; */
@@ -108,43 +172,10 @@ td:nth-of-type(3) {
   #details.show-left, #details.show-right {
     transform: none;
   }
-
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr {
-		display: block;
-	}
-
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr {
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-
-	/* tr { border: 1px solid #ccc; } */
-
-	td:nth-of-type(1) {
-		display: inline-block;
-    font-style: italic;
-		/* border: none; */
-		/* border-bottom: 1px solid #eee; */
-		/* position: relative; */
-		/* padding-left: 50%; */
-	}
-
-	td:nth-of-type(2) {
-		display: inline-block;
-    margin-left: 0.2em;
-    font-style: italic;
-		/* border: none; */
-		/* border-bottom: 1px solid #eee; */
-		/* position: relative; */
-		/* padding-left: 50%; */
-	}
 }
 
 .nodes text {
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
   font-size: 8pt;
   pointer-events: none;
   text-anchor: start !important;  /* override alignment calculation */
